@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education - Subikshan Mani</title>
+    <link rel="stylesheet" href="education.css">
+    <link rel="stylesheet" href="style.css"> <!-- If you want consistent header/footer -->
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Subikshan Mani</a>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html">Skills</a>
+            <a href="education.html" class="active">Education</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="education-section">
+        <h1 class="section-title">My <span>Education</span></h1>
+
+        <div class="education-container">
+            <div class="education-card">
+                <h2>Bachelor of Technology</h2>
+                <p class="school">M. Kumarasamy College Of Engineering, Karur</p>
+                <p class="date">2023 - 2027</p>
+                <p class="desc">Currently pursuing B.Tech. in Artificial Intelligence And Data Science with interests in Artificial Intelligence, web development, software design, and upcoming technologies.</p>
+            </div>
+
+            <div class="education-card">
+                <h2>Higher Secondary Education</h2>
+                <p class="school">Trinity International School, Namakkal</p>
+                <p class="date">2021 - 2023</p>
+                <p class="desc">Completed HSC with major in Computer Science and Mathematics.</p>
+            </div>
+
+            <div class="education-card">
+                <h2>SSLC (10th Grade)</h2>
+                <p class="school">Park View Academy, Namakkal</p>
+                <p class="date">2020 - 2021</p>
+                <p class="desc">Graduated with distinction. Built interest in technology.</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    </script>
+</body>
+</html>

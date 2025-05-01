@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skills - Subikshan Mani</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="skills.css">
+</head>
+<body>
+    <header>
+        <a href="#" class="logo">Subikshan Mani</a>
+        <div class="menu-toggle">&#9776;</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="skills.html" class="active">Skills</a>
+            <a href="education.html">Education</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="skills-section">
+        <h1 class="section-title">My <span>Skills</span></h1>
+
+        <div class="skills-container">
+            <div class="skill-category">
+                <h2>Programming Languages</h2>
+                <ul>
+                    <li>Python</li>
+                    <li>C</li>
+                    <li>Java</li>
+                    <li>JavaScript</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h2>Web Development</h2>
+                <ul>
+                    <li>HTML5</li>
+                    <li>CSS3</li>
+                    <li>PHP</li>
+                    <li>MySQL</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h2>Tools & Technologies</h2>
+                <ul>
+                    <li>Git & GitHub</li>
+                    <li>Linux (Ubuntu)</li>
+                    <li>VS Code</li>
+                </ul>
+            </div>
+
+            <div class="skill-category">
+                <h2>Soft Skills</h2>
+                <ul>
+                    <li>Problem Solving</li>
+                    <li>Team Collaboration</li>
+                    <li>Time Management</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Mobile menu toggle
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('nav');
+        toggle.addEventListener('click', () => nav.classList.toggle('active'));
+    </script>
+</body>
+</html>
