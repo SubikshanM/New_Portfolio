@@ -50,3 +50,12 @@
     left: 0;
     color: #b74b4b;
 }
+.section-title {
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 4rem;
+}
+
+.section-title span {
+    color: #b74b4b;
+}
