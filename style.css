@@ -10,16 +10,14 @@
     font-family: 'Poppins', sans-serif;
 }
 
-html, body {
-    width: 100%;
-    overflow-x: hidden;
-}
-
 html {
     font-size: 62.5%;
 }
 
 body {
+    width: 100%;
+    height: 100vh;
+    overflow-x: hidden;
     background-color: black;
     color: white;
 }
@@ -66,39 +64,36 @@ nav a.active {
     border-bottom: 3px solid #b74b4b;
 }
 
-@media (max-width: 995px) {
+@media(max-width:995px) {
     nav {
-        display: none;
         position: absolute;
-        top: 100%;
+        display: none;
+        top: 0;
         right: 0;
-        width: 60%;
-        background-color: #161616;
-        flex-direction: column;
-        padding: 2rem;
+        width: 40%;
         border-left: 3px solid #b74b4b;
         border-bottom: 3px solid #b74b4b;
         border-bottom-left-radius: 2rem;
-        z-index: 99;
+        padding: 1rem solid;
+        background-color: #161616;
+        border-top: 0.1rem solid rgba(0, 0, 0, 0.1);
     }
 
     nav.active {
-        display: flex;
+        display: block;
     }
 
     nav a {
         display: block;
-        margin: 1.5rem 0;
-        font-size: 1.8rem;
-        color: white;
+        font-size: 2rem;
+        margin: 3rem 0;
     }
 
     nav a:hover,
     nav a.active {
-        background-color: #b74b4b;
-        color: black;
         padding: 1rem;
         border-radius: 0.5rem;
+        border-bottom: 0.5rem solid #b74b4b;
     }
 }
 
@@ -145,9 +140,14 @@ span {
     position: relative;
     width: 32vw;
     border-radius: 50%;
-    box-shadow: 0 0 25px #b74b4b;
+    box-shadow: 0 0 25px solid #b74b4b;
     cursor: pointer;
     transition: 0.2s linear;
+}
+
+.home-img img:hover {
+    font-size: 1.8rem;
+    font-weight: 500;
 }
 
 .social-icons a {
@@ -182,7 +182,7 @@ span {
     letter-spacing: 0.3rem;
     font-weight: 600;
     border: 2px solid #b74b4b;
-    transition: 0.3s ease;
+    transition: 0.3 ease;
     cursor: pointer;
     margin-top: 2rem;
 }
@@ -217,7 +217,7 @@ span {
     width: calc(100% + 8px);
     height: 100%;
     border-left: 3px solid black;
-    right: -8px;
+    right: -8;
     animation: cursor 0.6s infinite;
 }
 
@@ -234,52 +234,49 @@ span {
     41%, 60% {
         content: "Web Designer";
     }
+    61%, 80% {
+        content: "Software Developer";
+    }
 }
 
-/* Responsive Fixes */
 @media (max-width: 1000px) {
     .home {
         gap: 4rem;
     }
 }
 
-@media (max-width: 995px) {
+@media(max-width:995px) {
+    body {
+        overflow-x: hidden;
+    }
+
     .home {
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        margin: 5rem 4rem;
         text-align: center;
-        padding: 3rem 2rem;
-        margin: 0 auto;
     }
 
-    .home-img img {
-        width: 65vw;
-        margin-top: 2rem;
-    }
-
-    .home-content {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .home .home-content h3 {
+        font-size: 2.5rem;
     }
 
     .home-content h1 {
         font-size: 5rem;
     }
 
-    .home-content h3 {
-        font-size: 2.5rem;
+    .home-img img {
+        width: 70vw;
+        margin-top: 4rem;
     }
 
     .home-content p {
-        padding: 0 1.5rem;
         text-align: justify;
+        margin: 0 2rem;
     }
 
     .btn {
-        margin-top: 2rem;
+        margin-top: 3rem;
         width: 80%;
         text-align: center;
     }
@@ -295,5 +292,39 @@ span {
 @media (max-width: 995px) {
     .menu-toggle {
         display: block;
+    }
+
+    nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        width: 60%;
+        background-color: #161616;
+        flex-direction: column;
+        padding: 2rem;
+        border-left: 3px solid #b74b4b;
+        border-bottom: 3px solid #b74b4b;
+        border-bottom-left-radius: 2rem;
+        z-index: 99;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    nav a {
+        display: block;
+        margin: 1.5rem 0;
+        font-size: 1.8rem;
+        color: white;
+    }
+
+    nav a:hover,
+    nav a.active {
+        background-color: #b74b4b;
+        color: black;
+        padding: 1rem;
+        border-radius: 0.5rem;
     }
 }
