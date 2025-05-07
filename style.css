@@ -289,7 +289,7 @@ span {
     cursor: pointer;
 }
 
-@media (max-width: 995px) {
+@media (max-width: 768px) {
     .menu-toggle {
         display: block;
     }
