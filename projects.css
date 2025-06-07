@@ -87,11 +87,12 @@
 /* --- Responsive only --- */
 @media (max-width: 768px) {
   .project-section {
-    padding: 4rem 5%;
+    padding: 10rem 5% 4rem; /* Add more top padding */
   }
 
   .section-title {
     font-size: 2.4rem;
+    margin-top: 1rem; /* Optional: extra spacing */
   }
 
   .project-card h2 {
@@ -102,3 +103,4 @@
     font-size: 1.3rem;
   }
 }
+
