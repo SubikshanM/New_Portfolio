@@ -87,7 +87,7 @@
 /* --- Responsive only --- */
 @media (max-width: 768px) {
   .project-section {
-    padding: 10rem 5% 4rem; /* Add more top padding */
+    padding: 7rem 5% 4rem; /* Add more top padding */
   }
 
   .section-title {
