@@ -11,7 +11,7 @@
 <body>
   <header>
     <a href="#" class="logo">Subikshan Mani</a>
-    <div class="menu-icon" onclick="toggleMenu()">
+    <div class="menu-icon" onclick="toggleMenu()" tabindex="0" role="button" aria-label="Toggle menu" onkeypress="if(event.key === 'Enter' || event.key === ' ') toggleMenu()">
       <i class="fa fa-bars"></i>
     </div>
     <nav id="navbar">
@@ -24,12 +24,33 @@
   </header>
 
   <section class="contact">
-    <h2>Contact Info</h2>
-    <div class="contact-info">
-      <p><i class="fa-solid fa-envelope"></i> Email: <a href="mailto:subikshan.mailbox@gmail.com">subikshan.mailbox@gmail.com</a></p>
-      <p><i class="fa-solid fa-phone"></i> Phone: <a href="tel:+919095076843">+91 90950 76843</a></p>
-      <p><i class="fa-brands fa-linkedin"></i> LinkedIn: <a href="https://www.linkedin.com/in/subikshan-mani-ba0321290/" target="_blank">linkedin.com/in/subikshan-mani</a></p>
-      <p><i class="fa-brands fa-github"></i> GitHub: <a href="https://github.com/SubikshanM" target="_blank">github.com/SubikshanM</a></p>
+    <h2 class="section-title">Contact <span>Info</span></h2>
+    <div class="contact-container">
+
+      <a href="mailto:subikshan.mailbox@gmail.com" class="contact-card">
+        <i class="fa-solid fa-envelope"></i>
+        <h3>Email</h3>
+        <p>subikshan.mailbox@gmail.com</p>
+      </a>
+
+      <a href="tel:+919095076843" class="contact-card">
+        <i class="fa-solid fa-phone"></i>
+        <h3>Phone</h3>
+        <p>+91 90950 76843</p>
+      </a>
+
+      <a href="https://www.linkedin.com/in/subikshan-mani-ba0321290/" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <i class="fa-brands fa-linkedin"></i>
+        <h3>LinkedIn</h3>
+        <p>linkedin.com/in/subikshan-mani</p>
+      </a>
+
+      <a href="https://github.com/SubikshanM" target="_blank" rel="noopener noreferrer" class="contact-card">
+        <i class="fa-brands fa-github"></i>
+        <h3>GitHub</h3>
+        <p>github.com/SubikshanM</p>
+      </a>
+
     </div>
   </section>
 
