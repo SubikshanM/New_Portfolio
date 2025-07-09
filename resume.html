@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Resume - Subikshan Mani</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+    }
+
+    .resume-image {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 8rem 2rem 2rem;
+    }
+
+    .resume-image img {
+      max-width: 90%;
+      height: auto;
+      border: none;
+      box-shadow: none;
+    }
+
+    @media (max-width: 768px) {
+      .resume-image {
+        padding: 10rem 1rem 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="#" class="logo">Subikshan Mani</a>
+    <div class="menu-toggle" id="menu-toggle">
+      <i class="fas fa-bars"></i>
+    </div>
+    <nav id="nav">
+      <a href="index.html">Home</a>
+      <a href="skills.html">Skills</a>
+      <a href="education.html">Education</a>
+      <a href="projects.html">Projects</a>
+      <a href="contact.html">Contact</a>
+      <a href="resume.html" class="active">Resume</a>
+    </nav>
+  </header>
+
+  <section class="resume-image">
+    <img src="assets/Resume.jpg" alt="Subikshan Mani Resume" />
+  </section>
+
+  <script>
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+    toggle.addEventListener('click', () => nav.classList.toggle('active'));
+  </script>
+</body>
+</html>
