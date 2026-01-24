@@ -17,12 +17,15 @@
     border: 2px solid #b74b4b;
     padding: 2rem;
     border-radius: 1rem;
-    transition: transform 0.3s ease;
+    transition: all 0.4s ease;
+    animation: borderPulse 3s ease-in-out infinite;
 }
 
 .skill-category:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px #b74b4b;
+    transform: scale(1.05) translateY(-10px);
+    box-shadow: 0 10px 40px rgba(183, 75, 75, 0.6);
+    animation: none;
+    background: linear-gradient(145deg, #161616, #1a1a1a);
 }
 
 .skill-category h2 {
@@ -30,6 +33,19 @@
     margin-bottom: 1.5rem;
     color: #b74b4b;
     text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.skill-category h2 i {
+    transition: transform 0.5s ease;
+}
+
+.skill-category:hover h2 i {
+    transform: rotate(360deg);
+}
+
+.skill-category h2:hover {
+    transform: scale(1.1);
 }
 
 .skill-category ul {
@@ -42,6 +58,20 @@
     margin-bottom: 0.8rem;
     position: relative;
     padding-left: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.skill-category ul li i {
+    transition: transform 0.3s ease;
+}
+
+.skill-category ul li:hover {
+    padding-left: 2rem;
+    color: #b74b4b;
+}
+
+.skill-category ul li:hover i {
+    transform: scale(1.3) rotate(10deg);
 }
 
 .skill-category ul li::before {

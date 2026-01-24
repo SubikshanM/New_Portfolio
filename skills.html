@@ -7,12 +7,13 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="skills.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
     <header>
-        <a href="#" class="logo">Subikshan Mani</a>
-        <div class="menu-toggle">&#9776;</div>
-        <nav>
+        <a href="#" class="logo"><i class="fas fa-code"></i> Subikshan Mani</a>
+        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars-staggered"></i></div>
+        <nav id="nav">
             <a href="index.html">Home</a>
             <a href="skills.html" class="active">Skills</a>
             <a href="education.html">Education</a>
@@ -22,54 +23,74 @@
     </header>
 
     <section class="skills-section">
-        <h1 class="section-title">My <span>Skills</span></h1>
+        <h1 class="section-title fade-in">My <span>Skills</span></h1>
 
         <div class="skills-container">
-            <div class="skill-category">
-                <h2>Programming Languages</h2>
+            <div class="skill-category fade-in fade-in-delay-1">
+                <h2><i class="fas fa-laptop-code"></i> Programming Languages</h2>
                 <ul>
-                    <li>Python</li>
-                    <li>C</li>
-                    <li>Java</li>
-                    <li>JavaScript</li>
+                    <li><i class="fab fa-python"></i> Python</li>
+                    <li><i class="fas fa-c"></i> C</li>
+                    <li><i class="fab fa-java"></i> Java</li>
+                    <li><i class="fab fa-js-square"></i> JavaScript</li>
                 </ul>
             </div>
 
-            <div class="skill-category">
-                <h2>Web Development</h2>
+            <div class="skill-category fade-in fade-in-delay-2">
+                <h2><i class="fas fa-globe-americas"></i> Web Development</h2>
                 <ul>
-                    <li>HTML5</li>
-                    <li>CSS3</li>
-                    <li>PHP</li>
-                    <li>MySQL</li>
+                    <li><i class="fab fa-html5"></i> HTML5</li>
+                    <li><i class="fab fa-css3-alt"></i> CSS3</li>
+                    <li><i class="fab fa-php"></i> PHP</li>
+                    <li><i class="fas fa-database"></i> MySQL</li>
                 </ul>
             </div>
 
-            <div class="skill-category">
-                <h2>Tools & Technologies</h2>
+            <div class="skill-category fade-in fade-in-delay-3">
+                <h2><i class="fas fa-tools"></i> Tools & Technologies</h2>
                 <ul>
-                    <li>Git & GitHub</li>
-                    <li>Linux (Ubuntu)</li>
-                    <li>VS Code</li>
+                    <li><i class="fab fa-git-alt"></i> Git & GitHub</li>
+                    <li><i class="fab fa-ubuntu"></i> Linux (Ubuntu)</li>
+                    <li><i class="fas fa-code"></i> VS Code</li>
                 </ul>
             </div>
 
-            <div class="skill-category">
-                <h2>Soft Skills</h2>
+            <div class="skill-category fade-in fade-in-delay-4">
+                <h2><i class="fas fa-user-graduate"></i> Soft Skills</h2>
                 <ul>
-                    <li>Problem Solving</li>
-                    <li>Team Collaboration</li>
-                    <li>Time Management</li>
+                    <li><i class="fas fa-brain"></i> Problem Solving</li>
+                    <li><i class="fas fa-users"></i> Team Collaboration</li>
+                    <li><i class="fas fa-clock"></i> Time Management</li>
                 </ul>
             </div>
         </div>
     </section>
 
     <script>
-        // Mobile menu toggle
-        const toggle = document.querySelector('.menu-toggle');
-        const nav = document.querySelector('nav');
-        toggle.addEventListener('click', () => nav.classList.toggle('active'));
+        const menuToggle = document.getElementById('menu-toggle');
+        const nav = document.getElementById('nav');
+
+        menuToggle.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Fade-in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
+            observer.observe(el);
+        });
     </script>
 </body>
 </html>
