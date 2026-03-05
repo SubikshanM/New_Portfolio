@@ -13,8 +13,8 @@
 body {
   width: 100%;
   min-height: 100vh;
-  background-color: black;
-  color: white;
+  background-color: var(--bg);
+  color: var(--text);
   overflow-x: hidden;
   padding-top: 100px;
 }
@@ -28,13 +28,13 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: transparent;
+  background-color: var(--panel);
   z-index: 1000;
 }
 
 .logo {
   font-size: 3rem;
-  color: #b74b4b;
+  color: var(--accent);
   font-weight: 800;
   transition: 0.5s ease;
   cursor: pointer;
@@ -46,7 +46,7 @@ header {
 
 nav a {
   font-size: 1.8rem;
-  color: white;
+  color: var(--text);
   margin-left: 4rem;
   font-weight: 500;
   transition: 0.3s ease;
@@ -55,14 +55,14 @@ nav a {
 
 nav a:hover,
 nav a.active {
-  color: #b74b4b;
-  border-bottom: 3px solid #b74b4b;
+  color: var(--accent);
+  border-bottom: 3px solid var(--accent);
 }
 
 .menu-icon {
   display: none;
   font-size: 2.8rem;
-  color: white;
+  color: var(--text);
   cursor: pointer;
 }
 
@@ -97,7 +97,7 @@ nav a.active {
   cursor: pointer;
   text-align: center;
   padding: 2rem;
-  background-color: #161616;
+  background-color: var(--panel);
   border: 2px solid #b74b4b;
   border-radius: 1rem;
   width: 100%;
@@ -150,7 +150,7 @@ nav a.active {
 
 .contact-card h3 {
   font-size: 2rem;
-  color: #fff;
+  color: var(--text);
   margin-bottom: 0.5rem;
   position: relative;
   z-index: 1;
@@ -186,7 +186,7 @@ nav a.active {
     top: 80px;
     right: 0;
     width: 60%;
-    background-color: rgba(22, 22, 22, 0.95);
+    background-color: var(--nav-bg);
     border-left: 3px solid #b74b4b;
     border-bottom: 3px solid #b74b4b;
     border-bottom-left-radius: 1rem;
@@ -204,13 +204,13 @@ nav a.active {
     display: block;
     font-size: 1.8rem;
     margin: 1.5rem 0;
-    color: white;
+    color: var(--text);
   }
 
   nav a:hover,
   nav a.active {
     background-color: #b74b4b;
-    color: black;
+    color: var(--bg);
     border-bottom: none;
     border-radius: 0.5rem;
     padding: 1rem;

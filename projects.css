@@ -1,7 +1,7 @@
 .project-section {
   padding: 8rem 9%;
-  background-color: black;
-  color: white;
+  background-color: var(--bg);
+  color: var(--text);
   min-height: 100vh;
 }
 
@@ -26,7 +26,7 @@
   border: 2px solid #b74b4b;
   border-radius: 1rem;
   padding: 2rem;
-  background-color: #161616;
+  background-color: var(--panel);
   box-shadow: 0 0 15px rgba(183, 75, 75, 0.3);
   transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   position: relative;
@@ -78,11 +78,11 @@
   font-size: 1.8rem;
   margin: 0.5rem 0;
   text-align: justify;
-  color: #ccc;
+  color: var(--muted);
 }
 
 .project-card strong {
-  color: #fff;
+  color: var(--text);
 }
 
 /* --- GitHub link styling ONLY --- */
@@ -145,6 +145,37 @@
   transform: scale(1.15) translateY(-5px);
   box-shadow: 0 10px 25px rgba(183, 75, 75, 0.5);
 }
+
+/* Tech badges */
+.tech-badges {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-top: 0.8rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  font-size: 1.2rem;
+  border-radius: 999px;
+  background: rgba(183,75,75,0.07);
+  color: var(--text);
+  border: 1px solid rgba(183,75,75,0.12);
+}
+
+.badge:hover { transform: translateY(-3px); }
+
+.badge.html { background: #e34c26; color: #fff; border-color: rgba(0,0,0,0.06); }
+.badge.css { background: #1572b6; color: #fff; }
+.badge.js { background: #f7df1e; color: #111; }
+.badge.python { background: #3572A5; color: #fff; }
+.badge.php { background: #777bb4; color: #fff; }
+.badge.node { background: #339933; color: #fff; }
+.badge.react { background: #61dafb; color: #000; }
+.badge.mysql { background: #00758f; color: #fff; }
+.badge.postgres { background: #336791; color: #fff; }
+.badge.tailwind { background: #06b6d4; color: #000; }
 /* --- Responsive only --- */
 @media (max-width: 768px) {
   .project-section {

@@ -13,18 +13,17 @@
     <header>
         <a href="#" class="logo">Subikshan Mani</a>
 
-        <!-- Hamburger icon -->
-        <div class="menu-toggle" id="menu-toggle">
-            <i class="fas fa-bars-staggered"></i>
-        </div>
-
         <nav id="nav">
             <a href="#" class="active">Home</a>
             <a href="skills.html">Skills</a>
-            <a href="education.html">Education</a>
-            <a href="projects.html">Projects</a>
+            <a href="education.html">Education</a>            <a href="certifications.html">Certifications</a>            <a href="projects.html">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <!-- Theme toggle -->
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+            <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars-staggered"></i></div>
+        </div>
     </header>
 
     <section class="home">
@@ -37,7 +36,7 @@
             <p>I am a passionate college student with a keen interest in web development and technology, and very interested in researching about technologies that inspires me a lot.</p>
             <div class="social-icons">
                 <a href="https://www.linkedin.com/in/subikshan-mani-ba0321290/" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
-                <a href="https://github.com/SubikshanM" target="_blank"><i class="fa-brands fa-github-alt"></i></a>
+                <a href="https://github.com/SubikshanM" target="_blank"><i class="fa-brands fa-github"></i></a>
                 <a href="tel:+919095076843"><i class="fa-solid fa-phone-volume"></i></a>
             </div>
             <a href="resume.html" class="btn"><i class="fas fa-file-alt"></i> View My Resume</a>
@@ -69,6 +68,31 @@
 
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
             observer.observe(el);
+        });
+
+        // Theme toggle: remember user preference and apply
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                themeIcon.className = 'fa-solid fa-sun';
+            } else {
+                document.documentElement.classList.remove('light-theme');
+                themeIcon.className = 'fa-solid fa-moon';
+            }
+        }
+
+        // initialize
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+            const next = current === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
         });
     </script>
 </body>

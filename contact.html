@@ -12,16 +12,20 @@
 <body>
   <header>
     <a href="#" class="logo"><i class="fas fa-code"></i> Subikshan Mani</a>
-    <div class="menu-icon" onclick="toggleMenu()" tabindex="0" role="button" aria-label="Toggle menu" onkeypress="if(event.key === 'Enter' || event.key === ' ') toggleMenu()">
-      <i class="fa fa-bars-staggered"></i>
-    </div>
     <nav id="navbar">
       <a href="index.html">Home</a>
       <a href="skills.html">Skills</a>
       <a href="education.html">Education</a>
+      <a href="certifications.html">Certifications</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html" class="active">Contact</a>
     </nav>
+    <div class="header-right">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+      <div class="menu-icon" onclick="toggleMenu()" tabindex="0" role="button" aria-label="Toggle menu" onkeypress="if(event.key === 'Enter' || event.key === ' ') toggleMenu()">
+        <i class="fa fa-bars-staggered"></i>
+      </div>
+    </div>
   </header>
 
   <section class="contact">
@@ -47,7 +51,7 @@
       </a>
 
       <a href="https://github.com/SubikshanM" target="_blank" rel="noopener noreferrer" class="contact-card fade-in fade-in-delay-4">
-        <i class="fa-brands fa-github-alt"></i>
+        <i class="fa-brands fa-github"></i>
         <h3>GitHub</h3>
         <p>github.com/SubikshanM</p>
       </a>
@@ -77,6 +81,29 @@
 
     document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
         observer.observe(el);
+    });
+    // Theme toggle: remember user preference and apply
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-theme');
+        themeIcon && (themeIcon.className = 'fa-solid fa-sun');
+      } else {
+        document.documentElement.classList.remove('light-theme');
+        themeIcon && (themeIcon.className = 'fa-solid fa-moon');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle && themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
     });
   </script>
 </body>

@@ -10,27 +10,57 @@
   <style>
     body {
       margin: 0;
-      background-color: black;
-      color: white;
-    }
-
-    .resume-image {
+      background-color: var(--bg);
+      color: var(--text);
       display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      padding: 8rem 2rem 2rem;
+      flex-direction: column;
+      align-items: center;
+      padding: 10rem 2rem 2rem;
+      min-height: 100vh;
     }
 
-    .resume-image img {
-      max-width: 90%;
-      height: auto;
+    .resume-wrapper {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .resume-pdf {
+      width: 100%;
+      height: calc(100vh - 14rem);
       border: none;
-      box-shadow: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 30px rgba(183, 75, 75, 0.25);
+      display: block;
+    }
+
+    .resume-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.8rem;
+      padding: 1rem 2.5rem;
+      background-color: var(--accent);
+      color: #fff;
+      font-size: 1.6rem;
+      font-weight: 600;
+      border-radius: 5rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .resume-download:hover {
+      background-color: var(--accent-strong);
     }
 
     @media (max-width: 768px) {
-      .resume-image {
-        padding: 10rem 1rem 1rem;
+      body {
+        padding: 10rem 1rem 2rem;
+      }
+      .resume-pdf {
+        height: 70vh;
       }
     }
   </style>
@@ -38,9 +68,6 @@
 <body>
   <header>
     <a href="#" class="logo"><i class="fas fa-code"></i> Subikshan Mani</a>
-    <div class="menu-toggle" id="menu-toggle">
-      <i class="fas fa-bars-staggered"></i>
-    </div>
     <nav id="nav">
       <a href="index.html">Home</a>
       <a href="skills.html">Skills</a>
@@ -49,11 +76,20 @@
       <a href="contact.html">Contact</a>
       <a href="resume.html" class="active">Resume</a>
     </nav>
+    <div class="header-right">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+      <div class="menu-toggle" id="menu-toggle">
+        <i class="fas fa-bars-staggered"></i>
+      </div>
+    </div>
   </header>
 
-  <section class="resume-image fade-in">
-    <img src="assets/Resume_Updated.jpg" alt="Subikshan Mani Resume" />
-  </section>
+  <div class="resume-wrapper fade-in">
+    <a class="resume-download" href="assets/resume_updated.pdf" download="Subikshan_Mani_Resume.pdf">
+      <i class="fas fa-download"></i> Download Resume
+    </a>
+    <iframe class="resume-pdf" src="assets/resume_updated.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Subikshan Mani Resume"></iframe>
+  </div>
 
   <script>
     const toggle = document.getElementById('menu-toggle');
@@ -76,6 +112,29 @@
 
     document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
         observer.observe(el);
+    });
+    // Theme toggle: remember user preference and apply
+    const themeToggle = document.getElementById('theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+
+    function applyTheme(theme) {
+      if (theme === 'light') {
+        document.documentElement.classList.add('light-theme');
+        themeIcon && (themeIcon.className = 'fa-solid fa-sun');
+      } else {
+        document.documentElement.classList.remove('light-theme');
+        themeIcon && (themeIcon.className = 'fa-solid fa-moon');
+      }
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    applyTheme(savedTheme);
+
+    themeToggle && themeToggle.addEventListener('click', () => {
+      const current = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+      const next = current === 'light' ? 'dark' : 'light';
+      localStorage.setItem('theme', next);
+      applyTheme(next);
     });
   </script>
 </body>

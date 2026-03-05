@@ -12,14 +12,18 @@
 <body>
     <header>
         <a href="#" class="logo"><i class="fas fa-code"></i> Subikshan Mani</a>
-        <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars-staggered"></i></div>
         <nav id="nav">
             <a href="index.html">Home</a>
             <a href="skills.html">Skills</a>
             <a href="education.html" class="active">Education</a>
+            <a href="certifications.html">Certifications</a>
             <a href="projects.html">Projects</a>
             <a href="contact.html">Contact</a>
         </nav>
+        <div class="header-right">
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
+            <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars-staggered"></i></div>
+        </div>
     </header>
 
     <section class="education-section">
@@ -30,11 +34,23 @@
                 <div class="timeline-dot">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
+                <div class="timeline-logo">
+                    <img src="assets/logos/image.png" alt="MKCE Logo" style="filter: none;">
+                </div>
                 <div class="timeline-content">
+                    <div class="status-badge">
+                        <i class="fas fa-circle-dot"></i> Currently Pursuing
+                    </div>
                     <div class="timeline-date">2023 - 2027</div>
                     <h2><i class="fas fa-graduation-cap"></i> Bachelor of Technology</h2>
                     <p class="school"><i class="fas fa-university"></i> M. Kumarasamy College Of Engineering, Karur</p>
                     <p class="desc">Currently pursuing B.Tech. in Artificial Intelligence And Data Science with interests in Artificial Intelligence, web development, software design, and upcoming technologies.</p>
+                    <div class="cgpa-display">
+                        <div class="cgpa-box">
+                            <div class="cgpa-number" data-cgpa="7.12">0.00</div>
+                            <div class="cgpa-label">Current CGPA</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -42,11 +58,20 @@
                 <div class="timeline-dot">
                     <i class="fas fa-user-graduate"></i>
                 </div>
+                <div class="timeline-logo">
+                    <img src="assets/logos/tis_logo.jpg" alt="Trinity School Logo" style="filter: none;">
+                </div>
                 <div class="timeline-content">
                     <div class="timeline-date">2021 - 2023</div>
                     <h2><i class="fas fa-user-graduate"></i> Higher Secondary Education</h2>
                     <p class="school"><i class="fas fa-school"></i> Trinity International School, Namakkal</p>
                     <p class="desc">Completed HSC with major in Computer Science and Mathematics.</p>
+                    <div class="cgpa-display">
+                        <div class="cgpa-box">
+                            <div class="cgpa-number" data-cgpa="70.2">0.0</div>
+                            <div class="cgpa-label">Percentage</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -54,11 +79,20 @@
                 <div class="timeline-dot">
                     <i class="fas fa-certificate"></i>
                 </div>
+                <div class="timeline-logo">
+                    <img src="assets/logos/pva_logo.png" alt="Park View Academy Logo" style="filter: none;">
+                </div>
                 <div class="timeline-content">
                     <div class="timeline-date">2020 - 2021</div>
                     <h2><i class="fas fa-certificate"></i> SSLC (10th Grade)</h2>
                     <p class="school"><i class="fas fa-school-flag"></i> Park View Academy, Namakkal</p>
                     <p class="desc">Graduated with distinction. Built interest in technology.</p>
+                    <div class="cgpa-display">
+                        <div class="cgpa-box">
+                            <div class="cgpa-number" data-cgpa="83.8">0.0</div>
+                            <div class="cgpa-label">Percentage</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -88,6 +122,59 @@
 
         document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right').forEach(el => {
             observer.observe(el);
+        });
+
+        // Animate CGPA counter
+        const cgpaNumbers = document.querySelectorAll('.cgpa-number');
+        
+        cgpaNumbers.forEach(cgpaNumber => {
+            const targetCGPA = parseFloat(cgpaNumber.getAttribute('data-cgpa'));
+            let currentCGPA = 0;
+            const duration = 2000;
+            const increment = targetCGPA / (duration / 16);
+            let hasAnimated = false;
+
+            const cgpaObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !hasAnimated) {
+                        hasAnimated = true;
+                        const counter = setInterval(() => {
+                            currentCGPA += increment;
+                            if (currentCGPA >= targetCGPA) {
+                                currentCGPA = targetCGPA;
+                                clearInterval(counter);
+                            }
+                            cgpaNumber.textContent = currentCGPA.toFixed(2);
+                        }, 16);
+                        cgpaObserver.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.3 });
+
+            cgpaObserver.observe(cgpaNumber);
+        });
+        // Theme toggle: remember user preference and apply
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+
+        function applyTheme(theme) {
+            if (theme === 'light') {
+                document.documentElement.classList.add('light-theme');
+                themeIcon && (themeIcon.className = 'fa-solid fa-sun');
+            } else {
+                document.documentElement.classList.remove('light-theme');
+                themeIcon && (themeIcon.className = 'fa-solid fa-moon');
+            }
+        }
+
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(savedTheme);
+
+        themeToggle && themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.classList.contains('light-theme') ? 'light' : 'dark';
+            const next = current === 'light' ? 'dark' : 'light';
+            localStorage.setItem('theme', next);
+            applyTheme(next);
         });
     </script>
 </body>
