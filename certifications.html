@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="certifications.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
 </head>
 <body>
     <header>
@@ -362,7 +363,10 @@
                     <div class="loader-spinner"></div>
                     <p>Loading certificate...</p>
                 </div>
-                <iframe id="cert-iframe" class="cert-iframe"></iframe>
+                <div id="pdf-viewer" class="pdf-viewer" style="display:none;">
+                    <canvas id="pdf-canvas"></canvas>
+                </div>
+                <iframe id="cert-iframe" class="cert-iframe" style="display:none;"></iframe>
             </div>
         </div>
     </div>
@@ -461,18 +465,77 @@
                 modalLoader.style.display = 'flex';
                 certIframe.style.display = 'none';
                 
-                // Load certificate
-                certIframe.src = certPath;
-                modal.classList.add('active');
-                document.body.style.overflow = 'hidden';
+                        // Load certificate: try PDF.js for PDFs (better mobile support), otherwise use iframe
+                        const isPDF = certPath.toLowerCase().endsWith('.pdf');
+                        modal.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+
+                        if (isPDF && window['pdfjsLib']) {
+                            // use PDF.js to render inside modal
+                            renderPDF(certPath).catch(() => {
+                                // fallback to iframe if PDF.js fails
+                                certIframe.src = certPath;
+                                certIframe.style.display = 'block';
+                            });
+                        } else {
+                            // non-pdf or pdf.js not available: use iframe fallback
+                            certIframe.src = certPath;
+                            certIframe.style.display = 'block';
+                        }
             });
         });
 
         // Hide loader when iframe loads
         certIframe.addEventListener('load', () => {
             modalLoader.style.display = 'none';
+            // show iframe viewer when loaded
+            document.getElementById('pdf-viewer').style.display = 'none';
             certIframe.style.display = 'block';
         });
+
+        // PDF.js rendering
+        const pdfCanvas = document.getElementById('pdf-canvas');
+        const pdfViewer = document.getElementById('pdf-viewer');
+        let pdfRendering = null;
+
+        async function renderPDF(url) {
+            modalLoader.style.display = 'flex';
+            certIframe.style.display = 'none';
+            pdfViewer.style.display = 'none';
+
+            // configure worker
+            if (window.pdfjsLib) {
+                pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+            }
+
+            try {
+                const loadingTask = pdfjsLib.getDocument(url);
+                pdfRendering = await loadingTask.promise;
+                const page = await pdfRendering.getPage(1);
+                const viewport = page.getViewport({ scale: 1.0 });
+
+                // scale to fit modal width
+                const containerWidth = Math.min(window.innerWidth * 0.9, 1000);
+                const scale = (containerWidth) / viewport.width;
+                const scaledViewport = page.getViewport({ scale });
+
+                pdfCanvas.width = scaledViewport.width;
+                pdfCanvas.height = scaledViewport.height;
+                const ctx = pdfCanvas.getContext('2d');
+                const renderContext = {
+                    canvasContext: ctx,
+                    viewport: scaledViewport
+                };
+                await page.render(renderContext).promise;
+
+                modalLoader.style.display = 'none';
+                pdfViewer.style.display = 'block';
+            } catch (err) {
+                modalLoader.style.display = 'none';
+                pdfViewer.style.display = 'none';
+                throw err;
+            }
+        }
 
         // Fullscreen toggle
         modalFullscreen.addEventListener('click', () => {
