@@ -79,6 +79,11 @@ header::before {
     transition: 0.5s ease;
 }
 
+/* Prevent the site title/logo from wrapping on small screens so header stays compact */
+.logo {
+    white-space: nowrap;
+}
+
 .logo:hover {
     transform: scale(1.1);
 }

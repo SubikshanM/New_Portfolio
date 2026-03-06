@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -26,6 +27,7 @@
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
+      margin-top: 2rem;
     }
 
     .resume-pdf {
@@ -62,6 +64,9 @@
       .resume-pdf {
         height: 70vh;
       }
+      .resume-wrapper {
+        margin-top: 4.5rem;
+      }
     }
   </style>
 </head>
@@ -84,11 +89,14 @@
     </div>
   </header>
 
-  <div class="resume-wrapper fade-in">
+    <div class="resume-wrapper fade-in">
     <a class="resume-download" href="assets/resume_updated.pdf" download="Subikshan_Mani_Resume.pdf">
       <i class="fas fa-download"></i> Download Resume
     </a>
-    <iframe class="resume-pdf" src="assets/resume_updated.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Subikshan Mani Resume"></iframe>
+    <div id="pdf-viewer" style="width:100%;">
+      <canvas id="resume-canvas" style="width:100%; display:block; border-radius:8px; box-shadow:0 4px 30px rgba(183,75,75,0.25);"></canvas>
+    </div>
+    <iframe id="resume-iframe" class="resume-pdf" src="assets/resume_updated.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Subikshan Mani Resume" style="display:none;"></iframe>
   </div>
 
   <script>
@@ -136,6 +144,40 @@
       localStorage.setItem('theme', next);
       applyTheme(next);
     });
+
+    // Render resume with PDF.js for better mobile support; iframe fallback if needed
+    (function renderResume(){
+      const url = 'assets/resume_updated.pdf';
+      const canvas = document.getElementById('resume-canvas');
+      const iframe = document.getElementById('resume-iframe');
+      if (!window.pdfjsLib) {
+        // no pdf.js, show iframe
+        iframe.style.display = 'block';
+        return;
+      }
+      pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+      const loadingTask = pdfjsLib.getDocument(url);
+      loadingTask.promise.then(pdf => {
+        return pdf.getPage(1).then(page => {
+          const viewport = page.getViewport({ scale: 1.0 });
+          // scale to fit container width
+          const containerWidth = Math.min(window.innerWidth * 0.95, 1100);
+          const scale = containerWidth / viewport.width;
+          const scaledViewport = page.getViewport({ scale });
+          const context = canvas.getContext('2d');
+          canvas.width = scaledViewport.width;
+          canvas.height = scaledViewport.height;
+          const renderContext = {
+            canvasContext: context,
+            viewport: scaledViewport
+          };
+          return page.render(renderContext).promise;
+        });
+      }).catch(() => {
+        // fallback to iframe
+        iframe.style.display = 'block';
+      });
+    })();
   </script>
 </body>
 </html>
