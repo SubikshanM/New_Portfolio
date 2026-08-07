@@ -1,26 +1,4 @@
-.certifications-section {
-    padding: 8rem 9%;
-    background-color: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-}
 
-.section-title {
-    text-align: center;
-    font-size: 4rem;
-    margin-bottom: 1rem;
-}
-
-.section-title span {
-    color: #b74b4b;
-}
-
-.section-subtitle {
-    text-align: center;
-    font-size: 1.6rem;
-    color: var(--muted);
-    margin-bottom: 5rem;
-}
 
 /* Category Headers */
 .category-header {
@@ -320,18 +298,7 @@
 }
 
 @media (max-width: 768px) {
-    .certifications-section {
-        padding: 7rem 4%;
-    }
 
-    .section-title {
-        font-size: 3rem;
-    }
-
-    .section-subtitle {
-        font-size: 1.4rem;
-        margin-bottom: 3rem;
-    }
 
     .category-header {
         flex-direction: column;
@@ -392,13 +359,7 @@
 }
 
 @media (max-width: 480px) {
-    .certifications-section {
-        padding: 6rem 3%;
-    }
 
-    .section-title {
-        font-size: 2.5rem;
-    }
 
     .cert-actions {
         flex-direction: column;
@@ -548,7 +509,7 @@
     flex: 1;
     position: relative;
     background: #0a0a0a;
-    overflow: hidden;
+    overflow: auto;
 }
 
 /* Modal Loader */
@@ -586,6 +547,9 @@
 }
 
 .cert-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     border: none;
@@ -703,5 +667,117 @@
 
     .modal-loader p {
         font-size: 1.2rem;
+    }
+}
+
+/* PDF Canvas & Viewer Styles */
+.pdf-viewer {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+#pdf-canvas {
+    max-width: 100%;
+    height: auto !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    border-radius: 4px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .pdf-viewer {
+        padding: 1rem;
+    }
+}
+
+/* Fullscreen Modal Adjustments */
+.modal-content:fullscreen {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+.modal-content:-webkit-full-screen {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+}
+
+/* Category Filter Bar */
+.filter-container {
+    max-width: 1000px;
+    margin: 0 auto 4rem;
+    position: relative;
+    padding: 0 1rem;
+}
+
+/* Scroll Wrapper */
+.filter-scroll-wrapper {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    padding: 1rem 0.5rem;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
+
+.filter-scroll-wrapper::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+}
+
+/* Filter Buttons */
+.filter-btn {
+    padding: 1rem 2.2rem;
+    background: var(--panel);
+    border: 2px solid #2a2a2a;
+    color: var(--muted);
+    border-radius: 3rem;
+    font-size: 1.4rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filter-btn:hover {
+    border-color: #b74b4b;
+    color: var(--text);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(183, 75, 75, 0.2);
+}
+
+.filter-btn.active {
+    background: linear-gradient(135deg, #b74b4b, #ff6b6b);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 8px 25px rgba(183, 75, 75, 0.4);
+    transform: scale(1.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .filter-container {
+        margin-bottom: 3rem;
+        padding: 0;
+    }
+    
+    .filter-scroll-wrapper {
+        gap: 1rem;
+        padding: 0.5rem 1.5rem;
+    }
+    
+    .filter-btn {
+        padding: 0.8rem 1.8rem;
+        font-size: 1.3rem;
     }
 }

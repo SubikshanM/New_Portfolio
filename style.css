@@ -141,6 +141,73 @@ section {
     padding: 5rem 9% 5rem;
 }
 
+/* Unified Section Spacing & Headings */
+.project-section,
+.education-section,
+.certifications-section,
+.skills-section,
+.contact,
+.resume-section {
+    min-height: 100vh;
+    padding: 12rem 9% 5rem;
+    background-color: var(--bg);
+    color: var(--text);
+}
+
+.section-title {
+    text-align: center;
+    font-size: 4rem;
+    margin-bottom: 4rem;
+    font-weight: 700;
+}
+
+.section-title span {
+    color: #b74b4b;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.6rem;
+    color: var(--muted);
+    margin-top: -3rem;
+    margin-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+    .project-section,
+    .education-section,
+    .certifications-section,
+    .skills-section,
+    .contact,
+    .resume-section {
+        padding: 11rem 4% 4rem !important;
+    }
+
+    .section-title {
+        font-size: 3rem !important;
+    }
+
+    .section-subtitle {
+        font-size: 1.4rem !important;
+        margin-bottom: 3rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .project-section,
+    .education-section,
+    .certifications-section,
+    .skills-section,
+    .contact,
+    .resume-section {
+        padding: 10rem 3% 3rem !important;
+    }
+
+    .section-title {
+        font-size: 2.5rem !important;
+    }
+}
+
 .home {
     display: flex;
     justify-content: center;
@@ -299,13 +366,13 @@ span {
 }
 
 @keyframes words {
-    0%, 20% {
-        content: "Web Developer";
+    0%, 30% {
+        content: "Full Stack Developer";
     }
-    41%, 60% {
+    35%, 65% {
         content: "Web Designer";
     }
-    61%, 80% {
+    70%, 100% {
         content: "Software Developer";
     }
 }

@@ -8,11 +8,16 @@
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="contact.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+  <style>
+    .hidden {
+      display: none !important;
+    }
+  </style>
 </head>
 <body>
   <header>
     <a href="#" class="logo"><i class="fas fa-code"></i> Subikshan Mani</a>
-    <nav id="navbar">
+    <nav id="nav">
       <a href="index.html">Home</a>
       <a href="skills.html">Skills</a>
       <a href="education.html">Education</a>
@@ -22,48 +27,82 @@
     </nav>
     <div class="header-right">
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
-      <div class="menu-icon" onclick="toggleMenu()" tabindex="0" role="button" aria-label="Toggle menu" onkeypress="if(event.key === 'Enter' || event.key === ' ') toggleMenu()">
-        <i class="fa fa-bars-staggered"></i>
-      </div>
+      <div class="menu-toggle" id="menu-toggle"><i class="fas fa-bars-staggered"></i></div>
     </div>
   </header>
 
   <section class="contact">
-    <h2 class="section-title fade-in">Contact <span>Info</span></h2>
-    <div class="contact-container">
+    <h2 class="section-title fade-in">Contact <span>Me</span></h2>
+    <div class="contact-section-wrapper">
+      
+      <!-- Left Column: Contact Cards -->
+      <div class="contact-info-column">
+        <a href="mailto:subikshan.mailbox@gmail.com" class="contact-card fade-in fade-in-delay-1">
+          <i class="fa-solid fa-envelope-open-text"></i>
+          <h3>Email</h3>
+          <p>subikshan.mailbox@gmail.com</p>
+        </a>
 
-      <a href="mailto:subikshan.mailbox@gmail.com" class="contact-card fade-in fade-in-delay-1">
-        <i class="fa-solid fa-envelope-open-text"></i>
-        <h3>Email</h3>
-        <p>subikshan.mailbox@gmail.com</p>
-      </a>
+        <a href="https://github.com/SubikshanM" target="_blank" rel="noopener noreferrer" class="contact-card fade-in fade-in-delay-2">
+          <i class="fa-brands fa-github"></i>
+          <h3>GitHub</h3>
+          <p>github.com/SubikshanM</p>
+        </a>
+      </div>
 
-      <a href="tel:+919095076843" class="contact-card fade-in fade-in-delay-2">
-        <i class="fa-solid fa-phone-volume"></i>
-        <h3>Phone</h3>
-        <p>+91 90950 76843</p>
-      </a>
-
-      <a href="https://www.linkedin.com/in/subikshan-mani-ba0321290/" target="_blank" rel="noopener noreferrer" class="contact-card fade-in fade-in-delay-3">
-        <i class="fa-brands fa-linkedin-in"></i>
-        <h3>LinkedIn</h3>
-        <p>linkedin.com/in/subikshan-mani</p>
-      </a>
-
-      <a href="https://github.com/SubikshanM" target="_blank" rel="noopener noreferrer" class="contact-card fade-in fade-in-delay-4">
-        <i class="fa-brands fa-github"></i>
-        <h3>GitHub</h3>
-        <p>github.com/SubikshanM</p>
-      </a>
+      <!-- Right Column: Contact Form -->
+      <div class="contact-form-column fade-in fade-in-delay-2">
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-group">
+            <input type="text" id="name" name="name" class="form-control" placeholder="Your Name" required>
+            <span class="validation-badge"><i class="fas fa-check"></i></span>
+          </div>
+          <div class="form-group">
+            <input type="email" id="email" name="email" class="form-control" placeholder="Your Email" required>
+            <span class="validation-badge"><i class="fas fa-check"></i></span>
+          </div>
+          <div class="form-group">
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Subject" required>
+            <span class="validation-badge"><i class="fas fa-check"></i></span>
+          </div>
+          <div class="form-group">
+            <textarea id="message" name="message" class="form-control" placeholder="Your Message" rows="6" required></textarea>
+            <span class="validation-badge"><i class="fas fa-check"></i></span>
+          </div>
+          <button type="submit" id="submit-btn" class="btn form-btn">
+            Send Message <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+      </div>
 
     </div>
   </section>
 
+  <!-- Success Modal Overlay -->
+  <div id="contact-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div class="modal-icon-container">
+        <div id="modal-spinner" class="spinner"></div>
+        <div id="modal-success-icon" class="success-icon hidden">
+          <i class="fas fa-check-circle"></i>
+        </div>
+        <div id="modal-error-icon" class="error-icon hidden">
+          <i class="fas fa-times-circle"></i>
+        </div>
+      </div>
+      <h3 id="modal-title">Sending...</h3>
+      <p id="modal-desc">Please wait while your message is being sent.</p>
+      <button id="modal-close-btn" class="btn hidden">Close</button>
+    </div>
+  </div>
+
   <script>
-    function toggleMenu() {
-      const nav = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const nav = document.getElementById('nav');
+
+    menuToggle.addEventListener('click', () => {
       nav.classList.toggle('active');
-    }
+    });
 
     // Fade-in animation on scroll
     const observerOptions = {
@@ -104,6 +143,137 @@
       const next = current === 'light' ? 'dark' : 'light';
       localStorage.setItem('theme', next);
       applyTheme(next);
+    });
+
+    // Contact Form Live Validation and Submission
+    const contactForm = document.getElementById('contact-form');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
+
+    const contactModal = document.getElementById('contact-modal');
+    const modalSpinner = document.getElementById('modal-spinner');
+    const modalSuccessIcon = document.getElementById('modal-success-icon');
+    const modalErrorIcon = document.getElementById('modal-error-icon');
+    const modalTitle = document.getElementById('modal-title');
+    const modalDesc = document.getElementById('modal-desc');
+    const modalCloseBtn = document.getElementById('modal-close-btn');
+
+    // Validation patterns
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    function validateField(input, validationFn) {
+        const isValid = validationFn(input.value.trim());
+        if (input.value.trim() === '') {
+            input.classList.remove('is-valid', 'is-invalid');
+        } else if (isValid) {
+            input.classList.remove('is-invalid');
+            input.classList.add('is-valid');
+        } else {
+            input.classList.remove('is-valid');
+            input.classList.add('is-invalid');
+        }
+        return isValid;
+    }
+
+    // Event listeners for live validation
+    nameInput.addEventListener('input', () => {
+        validateField(nameInput, val => val.length >= 2);
+    });
+
+    emailInput.addEventListener('input', () => {
+        validateField(emailInput, val => emailRegex.test(val));
+    });
+
+    subjectInput.addEventListener('input', () => {
+        validateField(subjectInput, val => val.length >= 3);
+    });
+
+    messageInput.addEventListener('input', () => {
+        validateField(messageInput, val => val.length >= 10);
+    });
+
+    // Handle Form Submit
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        // Perform final check
+        const isNameValid = validateField(nameInput, val => val.length >= 2);
+        const isEmailValid = validateField(emailInput, val => emailRegex.test(val));
+        const isSubjectValid = validateField(subjectInput, val => val.length >= 3);
+        const isMessageValid = validateField(messageInput, val => val.length >= 10);
+
+        if (!isNameValid || !isEmailValid || !isSubjectValid || !isMessageValid) {
+            return; // Don't submit if invalid
+        }
+
+        // Show loading modal
+        contactModal.classList.add('show');
+        modalSpinner.classList.remove('hidden');
+        modalSuccessIcon.classList.add('hidden');
+        modalErrorIcon.classList.add('hidden');
+        modalCloseBtn.classList.add('hidden');
+        modalTitle.textContent = "Sending...";
+        modalDesc.textContent = "Please wait while your message is being sent.";
+
+        const formData = {
+            name: nameInput.value.trim(),
+            email: emailInput.value.trim(),
+            subject: subjectInput.value.trim(),
+            message: messageInput.value.trim(),
+            access_key: "390ade32-77a3-42a5-b4d6-f27135982be4" // User's Web3Forms access key
+        };
+
+        // If access key is placeholder, simulate success so it works in preview
+        if (formData.access_key === "YOUR_ACCESS_KEY_HERE") {
+            setTimeout(() => {
+                showSuccessState();
+            }, 1500);
+            return;
+        }
+
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(formData)
+        })
+        .then(async (response) => {
+            let json = await response.json();
+            if (response.status == 200) {
+                showSuccessState();
+            } else {
+                showErrorState(json.message || "Something went wrong.");
+            }
+        })
+        .catch(error => {
+            showErrorState("Network error. Please try again later.");
+        });
+    });
+
+    function showSuccessState() {
+        modalSpinner.classList.add('hidden');
+        modalSuccessIcon.classList.remove('hidden');
+        modalCloseBtn.classList.remove('hidden');
+        modalTitle.textContent = "Success!";
+        modalDesc.textContent = "Thank you! Your message has been sent successfully.";
+        contactForm.reset();
+        document.querySelectorAll('.form-control').forEach(el => el.classList.remove('is-valid'));
+    }
+
+    function showErrorState(errMsg) {
+        modalSpinner.classList.add('hidden');
+        modalErrorIcon.classList.remove('hidden');
+        modalCloseBtn.classList.remove('hidden');
+        modalTitle.textContent = "Oops!";
+        modalDesc.textContent = errMsg;
+    }
+
+    modalCloseBtn.addEventListener('click', () => {
+        contactModal.classList.remove('show');
     });
   </script>
 </body>

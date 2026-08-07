@@ -31,8 +31,22 @@
         <h1 class="section-title fade-in">My <span>Certifications</span></h1>
         <p class="section-subtitle fade-in">Professional courses and credentials earned</p>
 
+        <!-- Category Filter Bar -->
+        <div class="filter-container fade-in">
+            <div class="filter-scroll-wrapper" id="filter-wrapper">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="data-science">Data Science & Analytics</button>
+                <button class="filter-btn" data-filter="ml-ai">Machine Learning & AI</button>
+                <button class="filter-btn" data-filter="big-data">Big Data & Tech</button>
+                <button class="filter-btn" data-filter="cloud">Cloud Computing</button>
+                <button class="filter-btn" data-filter="security">Cybersecurity</button>
+                <button class="filter-btn" data-filter="ibm">IBM SkillsBuild</button>
+            </div>
+        </div>
+
         <!-- Data Science & Analytics Category -->
-        <div class="category-header fade-in">
+        <div class="category-wrapper" data-category="data-science">
+            <div class="category-header fade-in">
             <i class="fas fa-chart-line"></i>
             <h2>Data Science & Analytics</h2>
             <span class="cert-count">5 Certificates</span>
@@ -118,9 +132,11 @@
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (data-science) -->
 
         <!-- Machine Learning & AI Category -->
-        <div class="category-header fade-in">
+        <div class="category-wrapper" data-category="ml-ai">
+            <div class="category-header fade-in">
             <i class="fas fa-brain"></i>
             <h2>Machine Learning & AI</h2>
             <span class="cert-count">3 Certificates</span>
@@ -174,9 +190,11 @@
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (ml-ai) -->
 
         <!-- Big Data & Technologies Category -->
-        <div class="category-header fade-in">
+        <div class="category-wrapper" data-category="big-data">
+            <div class="category-header fade-in">
             <i class="fas fa-fire"></i>
             <h2>Big Data & Technologies</h2>
             <span class="cert-count">2 Certificates</span>
@@ -214,9 +232,11 @@
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (big-data) -->
 
         <!-- Cloud Computing Category -->
-        <div class="category-header fade-in">
+        <div class="category-wrapper" data-category="cloud">
+            <div class="category-header fade-in">
             <i class="fas fa-cloud"></i>
             <h2>Cloud Computing</h2>
             <span class="cert-count">1 Certificate</span>
@@ -238,9 +258,11 @@
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (cloud) -->
 
         <!-- Security Category -->
-        <div class="category-header fade-in">
+        <div class="category-wrapper" data-category="security">
+            <div class="category-header fade-in">
             <i class="fas fa-shield-alt"></i>
             <h2>Cybersecurity</h2>
             <span class="cert-count">1 Certificate</span>
@@ -262,11 +284,13 @@
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (security) -->
 
-        <!-- Design Category -->
-        <div class="category-header fade-in">
-            <i class="fas fa-palette"></i>
-            <h2>Design</h2>
+        <!-- IBM SkillsBuild Category -->
+        <div class="category-wrapper" data-category="ibm">
+            <div class="category-header fade-in">
+            <i class="fa-brands fa-ibm"></i>
+            <h2>IBM SkillsBuild</h2>
             <span class="cert-count">3 Certificates</span>
         </div>
         <div class="certificates-grid">
@@ -274,13 +298,13 @@
                 <div class="cert-icon">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
                 </div>
-                <h3>IBM Design Thinking</h3>
-                <p class="cert-issuer"><i class="fas fa-building"></i> IBM</p>
+                <h3>Journey to Cloud: Envisioning Your Solution</h3>
+                <p class="cert-issuer"><i class="fas fa-building"></i> IBM SkillsBuild</p>
                 <div class="cert-actions">
                     <a href="certificates/IBMDesign20260305-31-ke9ff7.pdf" target="_blank" class="cert-btn view-btn">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <a href="certificates/IBMDesign20260305-31-ke9ff7.pdf" download="IBM_Design_Thinking.pdf" class="cert-btn download-btn">
+                    <a href="certificates/IBMDesign20260305-31-ke9ff7.pdf" download="Journey_to_Cloud_Envisioning_Your_Solution.pdf" class="cert-btn download-btn">
                         <i class="fas fa-download"></i> Download
                     </a>
                 </div>
@@ -290,13 +314,13 @@
                 <div class="cert-icon">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
                 </div>
-                <h3>IBM Design Principles</h3>
-                <p class="cert-issuer"><i class="fas fa-building"></i> IBM</p>
+                <h3>Getting Started with Artificial Intelligence</h3>
+                <p class="cert-issuer"><i class="fas fa-building"></i> IBM SkillsBuild</p>
                 <div class="cert-actions">
                     <a href="certificates/IBMDesign20260305-31-w7o0yc.pdf" target="_blank" class="cert-btn view-btn">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <a href="certificates/IBMDesign20260305-31-w7o0yc.pdf" download="IBM_Design_Principles.pdf" class="cert-btn download-btn">
+                    <a href="certificates/IBMDesign20260305-31-w7o0yc.pdf" download="Getting_Started_with_Artificial_Intelligence.pdf" class="cert-btn download-btn">
                         <i class="fas fa-download"></i> Download
                     </a>
                 </div>
@@ -306,18 +330,19 @@
                 <div class="cert-icon">
                     <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/IBM_logo.svg" alt="IBM">
                 </div>
-                <h3>IBM Design Essentials</h3>
-                <p class="cert-issuer"><i class="fas fa-building"></i> IBM</p>
+                <h3>Scala Programming for Data Science - Level 1</h3>
+                <p class="cert-issuer"><i class="fas fa-building"></i> IBM SkillsBuild</p>
                 <div class="cert-actions">
                     <a href="certificates/IBMDesign20260305-32-uwqn2z.pdf" target="_blank" class="cert-btn view-btn">
                         <i class="fas fa-eye"></i> View
                     </a>
-                    <a href="certificates/IBMDesign20260305-32-uwqn2z.pdf" download="IBM_Design_Essentials.pdf" class="cert-btn download-btn">
+                    <a href="certificates/IBMDesign20260305-32-uwqn2z.pdf" download="Scala_Programming_for_Data_Science_Level_1.pdf" class="cert-btn download-btn">
                         <i class="fas fa-download"></i> Download
                     </a>
                 </div>
             </div>
         </div>
+        </div> <!-- End category-wrapper (ibm) -->
 
         <!-- Stats Section -->
         <div class="cert-stats fade-in">
@@ -593,6 +618,61 @@
             if (e.key === 'Escape' && modal.classList.contains('active')) {
                 closeModal();
             }
+        });
+
+        // Category Filter Functionality
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const categoryWrappers = document.querySelectorAll('.category-wrapper');
+        const filterWrapper = document.getElementById('filter-wrapper');
+
+        // Scroll hint animation on load
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                filterWrapper.scrollTo({
+                    left: 50,
+                    behavior: 'smooth'
+                });
+                setTimeout(() => {
+                    filterWrapper.scrollTo({
+                        left: 0,
+                        behavior: 'smooth'
+                    });
+                }, 400);
+            }, 600);
+        });
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Set active class
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+
+                const filterValue = btn.getAttribute('data-filter');
+
+                // Filter categories
+                categoryWrappers.forEach(wrapper => {
+                    const category = wrapper.getAttribute('data-category');
+                    if (filterValue === 'all' || category === filterValue) {
+                        wrapper.style.display = 'block';
+                        // Trigger fade-in visibility
+                        wrapper.querySelectorAll('.fade-in').forEach(el => {
+                            el.classList.add('visible');
+                        });
+                    } else {
+                        wrapper.style.display = 'none';
+                    }
+                });
+
+                // Auto-center the clicked button in the scrollable bar
+                const btnLeft = btn.offsetLeft;
+                const btnWidth = btn.offsetWidth;
+                const wrapperWidth = filterWrapper.offsetWidth;
+                
+                filterWrapper.scrollTo({
+                    left: btnLeft - (wrapperWidth / 2) + (btnWidth / 2),
+                    behavior: 'smooth'
+                });
+            });
         });
 
     // Theme toggle: remember user preference and apply

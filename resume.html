@@ -13,11 +13,6 @@
       margin: 0;
       background-color: var(--bg);
       color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 10rem 2rem 2rem;
-      min-height: 100vh;
     }
 
     .resume-wrapper {
@@ -27,12 +22,12 @@
       flex-direction: column;
       align-items: center;
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin: 0 auto;
     }
 
     .resume-pdf {
       width: 100%;
-      height: calc(100vh - 14rem);
+      height: calc(100vh - 20rem);
       border: none;
       border-radius: 8px;
       box-shadow: 0 4px 30px rgba(183, 75, 75, 0.25);
@@ -51,6 +46,7 @@
       border-radius: 5rem;
       text-decoration: none;
       transition: background 0.3s;
+      margin-bottom: 1.5rem;
     }
 
     .resume-download:hover {
@@ -58,14 +54,8 @@
     }
 
     @media (max-width: 768px) {
-      body {
-        padding: 10rem 1rem 2rem;
-      }
       .resume-pdf {
         height: 70vh;
-      }
-      .resume-wrapper {
-        margin-top: 4.5rem;
       }
     }
   </style>
@@ -77,9 +67,9 @@
       <a href="index.html">Home</a>
       <a href="skills.html">Skills</a>
       <a href="education.html">Education</a>
+      <a href="certifications.html">Certifications</a>
       <a href="projects.html">Projects</a>
       <a href="contact.html">Contact</a>
-      <a href="resume.html" class="active">Resume</a>
     </nav>
     <div class="header-right">
       <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><i id="theme-icon" class="fa-solid fa-moon"></i></button>
@@ -89,15 +79,20 @@
     </div>
   </header>
 
+  <section class="resume-section">
+    <h1 class="section-title fade-in">My <span>Resume</span></h1>
+    <p class="section-subtitle fade-in">View and download my professional CV and career credentials</p>
+
     <div class="resume-wrapper fade-in">
-    <a class="resume-download" href="assets/resume_updated.pdf" download="Subikshan_Mani_Resume.pdf">
-      <i class="fas fa-download"></i> Download Resume
-    </a>
-    <div id="pdf-viewer" style="width:100%;">
-      <canvas id="resume-canvas" style="width:100%; display:block; border-radius:8px; box-shadow:0 4px 30px rgba(183,75,75,0.25);"></canvas>
+      <a class="resume-download" href="assets/Subikshan%20Mani%20Resume.pdf" download="Subikshan_Mani_Resume.pdf">
+        <i class="fas fa-download"></i> Download Resume
+      </a>
+      <div id="pdf-viewer" style="width:100%;">
+        <canvas id="resume-canvas" style="width:100%; display:block; border-radius:8px; box-shadow:0 4px 30px rgba(183,75,75,0.25);"></canvas>
+      </div>
+      <iframe id="resume-iframe" class="resume-pdf" src="assets/Subikshan%20Mani%20Resume.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Subikshan Mani Resume" style="display:none;"></iframe>
     </div>
-    <iframe id="resume-iframe" class="resume-pdf" src="assets/resume_updated.pdf#toolbar=0&navpanes=0&scrollbar=0&view=FitH" title="Subikshan Mani Resume" style="display:none;"></iframe>
-  </div>
+  </section>
 
   <script>
     const toggle = document.getElementById('menu-toggle');
@@ -147,8 +142,7 @@
 
     // Render resume with PDF.js for better mobile support; iframe fallback if needed
     (function renderResume(){
-      const url = 'assets/resume_updated.pdf';
-      const canvas = document.getElementById('resume-canvas');
+      const url = 'assets/Subikshan%20Mani%20Resume.pdf';
       const iframe = document.getElementById('resume-iframe');
       if (!window.pdfjsLib) {
         // no pdf.js, show iframe
@@ -158,22 +152,40 @@
       pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
       const loadingTask = pdfjsLib.getDocument(url);
       loadingTask.promise.then(pdf => {
-        return pdf.getPage(1).then(page => {
-          const viewport = page.getViewport({ scale: 1.0 });
-          // scale to fit container width
-          const containerWidth = Math.min(window.innerWidth * 0.95, 1100);
-          const scale = containerWidth / viewport.width;
-          const scaledViewport = page.getViewport({ scale });
-          const context = canvas.getContext('2d');
-          canvas.width = scaledViewport.width;
-          canvas.height = scaledViewport.height;
-          const renderContext = {
-            canvasContext: context,
-            viewport: scaledViewport
-          };
-          return page.render(renderContext).promise;
-        });
-      }).catch(() => {
+        const viewer = document.getElementById('pdf-viewer');
+        viewer.innerHTML = ''; // clear placeholder canvas
+        
+        let renderPromise = Promise.resolve();
+        for (let i = 1; i <= pdf.numPages; i++) {
+          renderPromise = renderPromise.then(() => {
+            return pdf.getPage(i).then(page => {
+              const viewport = page.getViewport({ scale: 1.0 });
+              const containerWidth = Math.min(window.innerWidth * 0.95, 1100);
+              const scale = containerWidth / viewport.width;
+              const scaledViewport = page.getViewport({ scale });
+              
+              const canvas = document.createElement('canvas');
+              canvas.style.width = '100%';
+              canvas.style.display = 'block';
+              canvas.style.borderRadius = '8px';
+              canvas.style.boxShadow = '0 4px 30px rgba(183,75,75,0.25)';
+              canvas.style.marginBottom = '2rem';
+              canvas.width = scaledViewport.width;
+              canvas.height = scaledViewport.height;
+              viewer.appendChild(canvas);
+              
+              const context = canvas.getContext('2d');
+              const renderContext = {
+                canvasContext: context,
+                viewport: scaledViewport
+              };
+              return page.render(renderContext).promise;
+            });
+          });
+        }
+        return renderPromise;
+      }).catch((err) => {
+        console.error("PDF rendering failed:", err);
         // fallback to iframe
         iframe.style.display = 'block';
       });
